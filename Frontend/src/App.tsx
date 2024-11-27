@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from "./components/Login.js"
 import Dashboard from './components/Dashboard.js';
 import RequireAuth from './components/Auth.jsx';
+import Schedule from './components/schedule.js';
 
 function App() {
   return (
@@ -14,7 +15,17 @@ function App() {
             <RequireAuth>
               <Dashboard />
             </RequireAuth>
+            
           }
+        />
+        <Route
+        path="/Schedule"
+        element={
+          <RequireAuth>
+            <Schedule />
+            </RequireAuth>
+
+        }
         />
       </Routes>
     </Router>
