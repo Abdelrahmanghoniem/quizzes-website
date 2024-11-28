@@ -9,7 +9,7 @@ export const createAnnouncement = async (quiz: any) => {
   try {
     const announcement = {
       title: `New Quiz Added: ${quiz.subject}`,
-      content: `${quiz.firstName} ${quiz.lastName} has created a new quiz on ${quiz.subject}. 
+      content: `${quiz.InstructorName} has created a new quiz on ${quiz.subject}. 
       Description: ${quiz.description}`,
       createdAt: new Date(),
     };
