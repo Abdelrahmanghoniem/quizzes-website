@@ -47,7 +47,7 @@ export const seedInitialquizzez=async()=>{
         const quizzes=[
     
     {
-      _id:"",
+      _id:"1",
         InstructorName:"bahaa sultan",
         subject:"football refreeing",
         description:"hi, i'm ahmed aidy and i teach football refreeing"
@@ -55,7 +55,7 @@ export const seedInitialquizzez=async()=>{
 
 
     {
-      _id:"",
+      _id:"2",
       InstructorName:"ahmed bahaa",
         subject:"programming",
         description:"hi, i'm ahmed metwally and i teach programming"
@@ -63,7 +63,7 @@ export const seedInitialquizzez=async()=>{
 
 
     {
-      _id:"",
+      _id:"3",
       InstructorName:"ahmed fathy",
         subject:"english",
         description:"hi, i'm ahmed fathy and i teach english"
