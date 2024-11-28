@@ -1,16 +1,16 @@
 import mongoose,{Schema,Document} from "mongoose";
 
 export interface IQuiz extends Document {
-    firstName: string;
-    lastName: string;
+    _id: string,
+    InstructorName: string;
     subject:string
     description:string;
 
 }
 
 const quizSchema=new Schema<IQuiz>({
-    firstName: {type:String,required:true},
-    lastName: {type:String,required:true},
+    _id: {type:String,required:true},
+    InstructorName: {type:String,required:true},
     subject: {type:String,required:true,unique:true},
     description: {type:String,required:true}
 })

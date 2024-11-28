@@ -47,33 +47,28 @@ export const seedInitialquizzez=async()=>{
         const quizzes=[
     
     {
-        firstName:"ahmed",
-        lastName:"aidy",
+      _id:"",
+        InstructorName:"bahaa sultan",
         subject:"football refreeing",
         description:"hi, i'm ahmed aidy and i teach football refreeing"
     },
 
 
     {
-        firstName:"ahmed",
-        lastName:"metwally",
+      _id:"",
+      InstructorName:"ahmed bahaa",
         subject:"programming",
         description:"hi, i'm ahmed metwally and i teach programming"
     },
 
 
     {
-        firstName:"ahmed",
-        lastName:"fathy",
+      _id:"",
+      InstructorName:"ahmed fathy",
         subject:"english",
         description:"hi, i'm ahmed fathy and i teach english"
     },
-    {
-        firstName:"ahmed",
-        lastName:"abdo",
-        subject:"french",
-        description:"hi, i'm ahmed fathy and i teach french"
-    },
+  
 
     ];
 
