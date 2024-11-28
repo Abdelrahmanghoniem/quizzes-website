@@ -150,7 +150,7 @@ export default function MiniDrawer() {
         </DrawerHeader>
         <Divider />
         <List>
-          {['Dashboard', 'Schedule', 'Courses', 'Gradebook'].map((text, index) => (
+          {['Dashboard', 'Schedule', 'Courses', 'Gradebook','Performance','Announcements'].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 onClick={() => navigate(`/${text.toLowerCase()}`)} // Navigate to the respective route
@@ -201,58 +201,7 @@ export default function MiniDrawer() {
             </ListItem>
           ))}
         </List>
-        <Divider />
-        <List>
-          {['Performance', 'Announcement'].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-              <ListItemButton
-                sx={[
-                  {
-                    minHeight: 48,
-                    px: 2.5,
-                  },
-                  open
-                    ? {
-                        justifyContent: 'initial',
-                      }
-                    : {
-                        justifyContent: 'center',
-                      },
-                ]}
-              >
-                <ListItemIcon
-                  sx={[
-                    {
-                      minWidth: 0,
-                      justifyContent: 'center',
-                    },
-                    open
-                      ? {
-                          mr: 3,
-                        }
-                      : {
-                          mr: 'auto',
-                        },
-                  ]}
-                >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText
-                  primary={text}
-                  sx={[
-                    open
-                      ? {
-                          opacity: 1,
-                        }
-                      : {
-                          opacity: 0,
-                        },
-                  ]}
-                />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
+        
       </Drawer>
 
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
@@ -262,6 +211,8 @@ export default function MiniDrawer() {
           <Route path="/Schedule" element={<Typography>Schedule Page</Typography>} />
           <Route path="/courses" element={<Typography>Courses Page</Typography>} />
           <Route path="/gradebook" element={<Typography>Gradebook Page</Typography>} />
+          <Route path="/performance" element={<Typography>performance Page</Typography>} />
+          <Route path="/Announcements" element={<Typography>announcements Page</Typography>} />
         </Routes>
       </Box>
     </Box>
