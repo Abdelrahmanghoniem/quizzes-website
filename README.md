@@ -76,9 +76,6 @@ Internationalization (i18n) support for different languages.
 
 
 ### Running Tests
-To run tests for the backend, navigate to the backend directory and run:
-npm run test
-
 To run tests for the frontend, navigate to the frontend directory and run:
 npm run test
 
