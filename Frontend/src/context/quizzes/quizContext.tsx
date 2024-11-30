@@ -3,7 +3,10 @@ import {Quizitem} from "../../types/quiztypes";
 
 // Define the type for the context state
 interface QuizContextType {
+  
   quizItems: Quizitem[];
+
+
   createQuiz: (quizData: Quizitem) => Promise<Quizitem>;
   getAllQuizzes: () => Promise<Quizitem[]>;
   getQuizById: (id: string) => Promise<Quizitem | null>;
@@ -13,9 +16,11 @@ interface QuizContextType {
 
 }
 
+
 export const quizContext = createContext<QuizContextType>({
   quizItems: [],
   error:null,
+
   createQuiz: async () => {
     throw new Error("createQuiz function must be provided");
   },

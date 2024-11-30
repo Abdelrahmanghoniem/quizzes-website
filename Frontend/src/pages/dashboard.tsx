@@ -1,14 +1,21 @@
 import  { useEffect, useState } from 'react';
-import { Box, Typography, Grid2,  } from '@mui/material';
+import { Box, Typography, Grid2, Fab,  } from '@mui/material';
 
 import { Quizitem } from '../types/quiztypes';
 import Sidebar from '../components/Sidebar';
 import QuizCard from '../components/QuizCard';
 import { BASE_URL } from '../constants/BaseUrl';
+import CreateQuizModal from '../components/CreateQuizModal';
+
 
 const Dashboard = () => {
   const [quizzes, setQuizzes] = useState<Quizitem[]>([]);
   const [error, setError] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => setIsModalOpen(true);
+  const handleCloseModal = () => setIsModalOpen(false);
+
 
 
   
@@ -37,36 +44,56 @@ const Dashboard = () => {
   return (
     <Box display="flex">
       <Sidebar />
-        <Box sx={{ p: 3 }}>
+        <Box sx={{ p:10 }}>
           {/* Header Section */}
-          <Typography variant="h4" gutterBottom>
-            Welcome, to coligo!
-          </Typography>
+
           <Box
             sx={{
               display: "flex",
-              justifyContent: "space-between",
+              justifyContent: "center",
               alignItems: "center",
               p: 3,
               bgcolor: "lightblue",
               borderRadius: 2,
+              
+              margin: "0 auto", // Center the box horizontally
+
+              
             }}
-          ></Box>
+          >          <Typography sx={{fontSize:25,p:1}}>Welcome to the Dashboard</Typography>
+</Box>
           {/* Quiz Cards */}
           <Box>
-          <Grid2 container spacing={3} sx={{ mt: 3 }}>
+          <Grid2  display={'flex'} container spacing={20} sx={{ mt: 3 }}>
             {quizzes.map((quiz) => (
-              <Grid2 container size={{ xs: 12, sm: 6, md: 4 }} key={quiz._id}>
+              <Grid2 alignContent={'center'} display={'flex'} container size={{ xs: 12, sm: 6, md: 3 }} key={quiz._id}>
                 <QuizCard {...quiz} />
               </Grid2>
             ))}
           </Grid2>
           </Box>
-        </Box>
-      
+
+        {/* Floating Button */}
+      <Fab
+        color="primary"
+        aria-label="add"
+        onClick={handleOpenModal}
+        sx={{
+          position: "fixed",
+          bottom: 20,
+          right: 20,
+          backgroundColor: "primary.main",
+        }}
+      >
+          +
+      </Fab>
+
+      {/* Create Quiz Modal */}
+      {isModalOpen && <CreateQuizModal onClose={handleCloseModal} />}
+    </Box>
     </Box>
   );
-};
+}
 
 
 export default Dashboard;
