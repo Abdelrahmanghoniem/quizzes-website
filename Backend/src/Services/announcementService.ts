@@ -1,72 +1,81 @@
-import  AnnouncementModel  from './../models/AnnouncementModel';
-import quizModel from "../models/quizModel";
+// import mongoose from 'mongoose';
+// import { IQuiz } from '../models/quizModel';
+// import { announcementModel, IAnnouncement } from './../models/AnnouncementModel';
 
-/**
- * Function to create a new announcement.
- * @param quiz The quiz data used to generate the announcement.
- */
-export const createAnnouncement = async (quiz: any) => {
-  try {
-    const announcement = {
-      title: `New Quiz Added: ${quiz.subject}`,
-      content: `${quiz.InstructorName} has created a new quiz on ${quiz.subject}. 
-      Description: ${quiz.description}`,
-      createdAt: new Date(),
-    };
+// /**
+//  * Fetch all Announcementzes.
+//  */
+// export const getAllAnnouncements = async () => {
+//     return await announcementModel.find();
+//   };
+//   /**
+//  * Create a new Announcement.
+//  */
+// export const createAnnouncement = async (announcementData: Partial<IAnnouncement>) => {
+//   try {
+//     // Create and save the new announcement
+//     const newAnnouncement = new announcementModel(announcementData);
+//     await newAnnouncement.save();
+//     return newAnnouncement;
+//   } catch (err) {
+//     console.error("Error creating announcement:", err);
+//     throw err;
+//   }
+// };
+  
+//   /**
+//    * Fetch a Announcement by ID.
+//    */
+//   export const getAnnouncementById = async (id: string) => {
+//     return await announcementModel.findById(id);
+//   };
+  
+  
+  
+//   /**
+//    * Update a Announcement by ID.
+//    */
+//   export const updateAnnouncementById = async (id: string, AnnouncementData: any) => {
+//     return await announcementModel.findByIdAndUpdate(id, AnnouncementData, { new: true });
+//   };
+  
+//   /**
+//    * Delete a Announcement by ID.
+//    */
+//   export const deleteAnnouncementById = async (id: string) => {
+//     return await announcementModel.findByIdAndDelete(id);
+//   };
 
-    await AnnouncementModel.create(announcement);
-    console.log("Announcement created successfully.");
-  } catch (err) {
-    console.error("Failed to create announcement:", err);
-  }
-};
+//   export const seedInitialAnnouncements = async () => {
+//     try {
+//       const announcements = [
+//         {
+//           subject: "new football refreeing quiz added",
+//           InstructorName: "bahaa sultan",
+//           quizId: new mongoose.Types.ObjectId("1"), // Convert string to ObjectId
+//         },
+//         {
+//           subject: "new programming quiz added",
+//           InstructorName: "ahmed bahaa",
+//           quizId: new mongoose.Types.ObjectId("2"),
+//         },
+//         {
+//           subject: "new english quiz added",
+//           InstructorName: "ahmed fathy",
+//           quizId: new mongoose.Types.ObjectId("3"),
+//         }
+//       ];
+  
+//       const existingAnnouncements = await getAllAnnouncements();
+//       if (existingAnnouncements.length === 0) {
+//         await announcementModel.insertMany(announcements);
+//       }
+//     } catch (err) {
+//       console.error("Cannot seed announcements:", err);
+//     }
+//   };
+  
 
-/**
- * Function to create announcements for all quizzes in the database.
- */
-export const createAnnouncementsForAllQuizzes = async () => {
-  try {
-    const quizzes = await quizModel.find();
 
-    if (quizzes.length === 0) {
-      console.log("No quizzes found to create announcements.");
-      return;
-    }
-
-    for (const quiz of quizzes) {
-      await createAnnouncement(quiz);
-    }
-
-    console.log("Announcements created for all quizzes.");
-  } catch (err) {
-    console.error("Failed to create announcements for all quizzes:", err);
-  }
-};
-
-/**
- * Function to monitor and add a new announcement whenever a new quiz is added.
- * This function could be hooked into your application logic, like after creating a new quiz.
- * @param quiz The new quiz added to the database.
- */
-export const addQuizAndAnnouncement = async (quizData: any) => {
-  try {
-    const newQuiz = await quizModel.create(quizData);
-    console.log("Quiz added successfully.");
-
-    // Create an announcement for the new quiz
-    await createAnnouncement(newQuiz);
-  } catch (err) {
-    console.error("Failed to add quiz or create announcement:", err);
-  }
-};
-export const getAllAnnouncements = async () => {
-  try {
-    const announcements = await AnnouncementModel.find().sort({ createdAt: -1 }); // Sorted by newest first
-    console.log("Fetched all announcements successfully.");
-    return announcements;
-  } catch (err) {
-    console.error("Failed to fetch announcements:", err);
-    throw err;
-  }
-};
-
+  
+  

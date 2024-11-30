@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import { 
     getAllQuizzes, 
-    seedInitialquizzez, 
+    seedinitialquizzes, 
     createQuiz, 
     getQuizById, 
     updateQuizById, 
@@ -96,7 +96,7 @@ router.get("/:id", async (req: Request, res: Response) => {
    */
   router.post("/seed", async (req: Request, res: Response) => {
     try {
-      await seedInitialquizzez();
+      await seedinitialquizzes();
       res.status(201).send({ message: "Database seeded with initial quizzes" });
     } catch (err) {
       console.error("Error seeding database:", err);

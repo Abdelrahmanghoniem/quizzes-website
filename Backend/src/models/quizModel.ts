@@ -6,13 +6,15 @@ export interface IQuiz extends Document {
     subject:string
     description:string;
 
+
 }
 
 const quizSchema=new Schema<IQuiz>({
     _id: {type:String,required:true},
     InstructorName: {type:String,required:true},
     subject: {type:String,required:true,unique:true},
-    description: {type:String,required:true}
+    description: {type:String,required:true},
+
 })
 
 const quizModel=mongoose.model<IQuiz>('Quiz',quizSchema)

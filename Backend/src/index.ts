@@ -3,10 +3,11 @@
   import express from "express";
   import mongoose from "mongoose";
   import productRoute from "./routes/quizRoute";
-  import announcemntRoute from "./routes/announcementsRoute"
-  import { seedInitialquizzez } from "./Services/quizzesService";
+  // import announcemntRoute from "./routes/announcementsRoute"
+  import { seedinitialquizzes } from "./Services/quizzesService";
   import cors from "cors";
-  import { announcementModel } from "./models/AnnouncementModel";
+  // import { announcementModel } from "./models/AnnouncementModel";
+// import { seedInitialAnnouncements } from "./Services/announcementService";
 
   dotenv.config();
 
@@ -22,10 +23,11 @@
     .catch((err) => console.log("Failed to connect!", err));
 
   // Seed the products to database
-  seedInitialquizzez();
+  seedinitialquizzes();
+  // seedInitialAnnouncements
 
   app.use("/quizzez", productRoute);
-  app.use("/announcements",announcemntRoute )
+  // app.use("/announcements",announcemntRoute )
 
   app.listen(port, () => {
     console.log(`Server is running at: http://localhost:${port}`);
