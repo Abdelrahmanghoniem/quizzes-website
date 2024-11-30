@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
-import {Routes,Route,useNavigate,} from 'react-router-dom'
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
@@ -29,6 +29,7 @@ const openedMixin = (theme: Theme): CSSObject => ({
     duration: theme.transitions.duration.enteringScreen,
   }),
   overflowX: 'hidden',
+  background: 'linear-gradient(135deg, #107ea6, #fcfcfc)', // Gradient background for Drawer
 });
 
 const closedMixin = (theme: Theme): CSSObject => ({
@@ -48,7 +49,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   alignItems: 'center',
   justifyContent: 'flex-end',
   padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
   ...theme.mixins.toolbar,
 }));
 
@@ -107,8 +107,15 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 export default function MiniDrawer() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  const navigate = useNavigate(); // Use navigate hook
+  const [selectedSection, setSelectedSection] = React.useState('');
+  const navigate = useNavigate();
+  const location = useLocation(); // Get current location to highlight the selected page
 
+  React.useEffect(() => {
+    // Set the selected section based on the current URL
+    const currentRoute = location.pathname.split('/')[1]; // Extract route name from URL
+    setSelectedSection(currentRoute || 'Dashboard');
+  }, [location]);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -116,6 +123,11 @@ export default function MiniDrawer() {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const handleSectionClick = (section: string) => {
+    setSelectedSection(section);
+    navigate(`/${section.toLowerCase()}`);
   };
 
   return (
@@ -128,12 +140,7 @@ export default function MiniDrawer() {
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
-            sx={[
-              {
-                marginRight: 5,
-              },
-              open && { display: 'none' },
-            ]}
+            sx={[{ marginRight: 5 }, open && { display: 'none' }]}
           >
             <MenuIcon />
           </IconButton>
@@ -142,66 +149,54 @@ export default function MiniDrawer() {
           </Typography>
         </Toolbar>
       </AppBar>
+
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+            Coligo
           </IconButton>
         </DrawerHeader>
+
         <Divider />
         <List>
-          {['Dashboard', 'Schedule', 'Courses', 'Gradebook','Performance','Announcements'].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-              <ListItemButton
-                onClick={() => navigate(`/${text.toLowerCase()}`)} // Navigate to the respective route
-                sx={[
-                  {
-                    minHeight: 48,
-                    px: 2.5,
-                  },
-                  open
-                    ? {
-                        justifyContent: 'initial',
-                      }
-                    : {
-                        justifyContent: 'center',
-                      },
-                ]}
-              >
-                <ListItemIcon
-                  sx={[
-                    {
-                      minWidth: 0,
-                      justifyContent: 'center',
-                    },
-                    open
-                      ? {
-                          mr: 3,
-                        }
-                      : {
-                          mr: 'auto',
-                        },
-                  ]}
-                >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText
-                  primary={text}
-                  sx={[
-                    open
-                      ? {
-                          opacity: 1,
-                        }
-                      : {
-                          opacity: 0,
-                        },
-                  ]}
-                />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-        
+  {['Dashboard', 'Schedule', 'Courses', 'Gradebook', 'Performance', 'Announcements'].map((text) => (
+    <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+      <ListItemButton
+        onClick={() => handleSectionClick(text)}
+        sx={{
+          minHeight: 48,
+          px: 2.5,
+          backgroundColor: selectedSection === text ? 'rgba(255, 245, 245, 0.1)' : 'transparent', // Subtle background
+          borderLeft: selectedSection === text ? '4px solid #ffffff' : '4px solid transparent', // Light white indicator on the left
+          '&:hover': {
+            backgroundColor: 'rgba(255, 255, 255, 0.2)', // Slightly darker hover effect
+          },
+        }}
+      >
+        <ListItemIcon
+          sx={{
+            minWidth: 0,
+            justifyContent: 'center',
+            color: selectedSection === text ? '#107ea6' : 'inherit', // Optional: Highlight icon for the selected route
+          }}
+        >
+          {text === 'Dashboard'  ? <InboxIcon /> : <MailIcon />}
+        </ListItemIcon>
+        <ListItemText
+          primary={text}
+          sx={{
+            color: selectedSection === text ? '#107ea6' : 'inherit', // Optional: Highlight text color
+            opacity: open ? 1 : 0,
+          }}
+        />
+      </ListItemButton>
+    </ListItem>
+  ))}
+</List>
+
+
+
       </Drawer>
 
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
@@ -209,10 +204,10 @@ export default function MiniDrawer() {
         <Routes>
           <Route path="/Dashboard" element={<Typography>Dashboard Page</Typography>} />
           <Route path="/Schedule" element={<Typography>Schedule Page</Typography>} />
-          <Route path="/courses" element={<Typography>Courses Page</Typography>} />
-          <Route path="/gradebook" element={<Typography>Gradebook Page</Typography>} />
-          <Route path="/performance" element={<Typography>performance Page</Typography>} />
-          <Route path="/Announcements" element={<Typography>announcements Page</Typography>} />
+          <Route path="/Courses" element={<Typography>Courses Page</Typography>} />
+          <Route path="/Gradebook" element={<Typography>Gradebook Page</Typography>} />
+          <Route path="/Performance" element={<Typography>Performance Page</Typography>} />
+          <Route path="/Announcements" element={<Typography>Announcements Page</Typography>} />
         </Routes>
       </Box>
     </Box>
