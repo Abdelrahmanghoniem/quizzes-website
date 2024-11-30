@@ -3,11 +3,12 @@
   import express from "express";
   import mongoose from "mongoose";
   import productRoute from "./routes/quizRoute";
-  // import announcemntRoute from "./routes/announcementsRoute"
   import { seedinitialquizzes } from "./Services/quizzesService";
   import cors from "cors";
+  
+  // import announcemntRoute from "./routes/announcementsRoute"
   // import { announcementModel } from "./models/AnnouncementModel";
-// import { seedInitialAnnouncements } from "./Services/announcementService";
+  // import { seedInitialAnnouncements } from "./Services/announcementService";
 
   dotenv.config();
 
