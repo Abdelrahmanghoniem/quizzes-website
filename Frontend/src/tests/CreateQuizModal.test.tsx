@@ -2,7 +2,6 @@ import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import CreateQuizModal from '../components/CreateQuizModal';
-import { BASE_URL } from '../constants/BaseUrl';
 
 
 // Mocking fetch to avoid actual API calls
